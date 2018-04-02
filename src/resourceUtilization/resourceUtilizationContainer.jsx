@@ -405,9 +405,12 @@ export class ResourceUtilizationComp extends Component{
               <div className="ResourceWrapper" style={{
                 display: 'table',
                 position:'relative',
-                border: 'thick black solid',
+                border: 'thick black solid'
                   }}>
-                <div style={{float: 'left',}}>{resource.firstName} {resource.lastName}</div>
+                <div style={{float: 'left',
+                  minWidth:'100px',
+                  maxWidth:'100px',
+                  width: '100px'}}>{resource.firstName} {resource.lastName}</div>
                 {resource.data.map((resourceData,i) => {
                   return(
                     <div id="dateWrapper"
@@ -419,12 +422,15 @@ export class ResourceUtilizationComp extends Component{
                          }}>
                       {resourceData.date.slice(0,10)}
                       <br/>
-                      <h2>{resourceData.totalHours}</h2>
+                      {/*<h2>{resourceData.totalHours}</h2>*/}
                       {resourceData.tickets.map((ticket,i) => {
                         return(
-                          <a href={'http://openpencil.com/pm/issue/'+ticket.id}>
+                          <a style={{textDecoration: 'none'}} href={'http://openpencil.com/pm/issues/'+ticket.id}>
                             <div style={{border: 'thin blue dotted', marginTop: '10px'}}>
-                              <div><strong>{ticket.estimatedHours}</strong> - {ticket.ticketName}</div>
+                              <div>
+                                <h3>{ticket.estimatedHours} Hrs</h3>
+                                {ticket.ticketDonePercentage}% - {ticket.ticketName}
+                              </div>
                              <div style={{textOverflow:'ellipsis',whiteSpace: 'nowrap',
                                overflow: 'hidden'}} ><strong>{ticket.projectName}}</strong></div>
                             </div>
@@ -435,19 +441,6 @@ export class ResourceUtilizationComp extends Component{
                   )
                 })}
               </div>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <p></p>
-              <p></p>
-
-              <p></p>
-              <p></p>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
               <br/>
               <hr/>
             </div>
