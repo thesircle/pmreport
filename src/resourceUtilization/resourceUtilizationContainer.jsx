@@ -340,13 +340,14 @@ export class ResourceUtilizationComp extends Component{
       return dateEntry;
     }
 
-    function createTicketEntry(dateEntry, ticketId, ticketName, projectName) {
+    function createTicketEntry(dateEntry, ticketId, ticketName, projectName, ticketDonePercentage) {
       "use strict";
 
       var ticketEntry = {
         "id": ticketId,
         "ticketName": ticketName,
         "projectName": projectName,
+        "ticketDonePercentage": ticketDonePercentage,
         "estimatedHours": 0
       };
 
@@ -375,7 +376,7 @@ export class ResourceUtilizationComp extends Component{
       var ticketEntry = dateEntry.tickets.find((ticket) => ticket.id === row.ticketId);
 
       if (undefined === ticketEntry)
-        ticketEntry = createTicketEntry(dateEntry, row.ticketId, row.ticketName, row.projectName);
+        ticketEntry = createTicketEntry(dateEntry, row.ticketId, row.ticketName, row.projectName, row.ticketDonePercentage);
 
       ticketEntry.estimatedHours += row.estimatedHours;
       dateEntry.totalHours = dateEntry.tickets.map((ticket) => ticket.estimatedHours).reduce((x) => x);
